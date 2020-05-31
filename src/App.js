@@ -35,9 +35,9 @@ class App extends React.Component {
       let GMTDay = prevState.GMT.dayOfWeek
       const rawBJT = Number(GMTTime) + 8
       const oneMoreDay = Number(rawBJT) > 24
-      const BJTDay = (oneMoreDay ? Number(GMTDay) + 1 :GMTDay)%7
+      let BJTDay = (oneMoreDay ? Number(GMTDay) + 1 :GMTDay)%7
+      if(BJTDay === 0 ) { BJTDay = 7}
       const BJT = (oneMoreDay ? Number(rawBJT) - 24 :rawBJT)%24
-
       return {showGMTTime: true,
               BJTFromGMT: {dayOfWeek: BJTDay, time: BJT}
             }
