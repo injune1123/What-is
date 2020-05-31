@@ -35,8 +35,8 @@ class App extends React.Component {
       let GMTDay = prevState.GMT.dayOfWeek
       const rawBJT = Number(GMTTime) + 8
       const oneMoreDay = Number(rawBJT) > 24
-      const BJTDay = oneMoreDay ? Number(GMTDay) + 1 :GMTDay
-      const BJT = oneMoreDay ? Number(rawBJT) - 24 :rawBJT
+      const BJTDay = (oneMoreDay ? Number(GMTDay) + 1 :GMTDay)%7
+      const BJT = (oneMoreDay ? Number(rawBJT) - 24 :rawBJT)%24
 
       return {showGMTTime: true,
               BJTFromGMT: {dayOfWeek: BJTDay, time: BJT}
@@ -52,17 +52,17 @@ class App extends React.Component {
         <h1>我来帮你算</h1>
       </header>
       <body>
-      <h2>北京时间是多少？</h2>
+      <h2>算一算北京时间</h2>
         <section>
-          <h3>GMT时间是</h3>
+          <h3>假设GMT时间是（请输入）:</h3>
           <div>
-          星期<input type="text" placeholder="1" 
+          星期<input type="text" placeholder="1~7" 
           value={this.state.GMT.dayOfWeek}
           onChange={this.onChangeGMTDate}
           ></input>
           </div>
           <span>
-          <input placeholder="16"
+          <input placeholder="0~24"
             value={this.state.GMT.time}
             onChange={this.onChangeGMTTime}
           ></input>点
